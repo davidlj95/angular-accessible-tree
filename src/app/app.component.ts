@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SAMPLE_TREE} from "./data/sample-tree";
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  protected readonly SAMPLE_TREE = SAMPLE_TREE;
 }

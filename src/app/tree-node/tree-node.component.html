@@ -1,0 +1,28 @@
+<ng-template [ngIf]="node.data">
+  <div class="data" [class.actionable]="node.isBranch" (click)="onClick()"
+       (keydown.arrowLeft)="onKeydownArrowLeft()"
+       (keydown.arrowRight)="onKeydownArrowRight()"
+       (keydown.arrowDown)="onKeydownArrowDown()"
+       (keydown.arrowUp)="onKeydownArrowUp()"
+       (keydown.home)="onKeydownHome()"
+       (keydown.end)="onKeydownEnd()"
+       (keydown.*)="onKeydownAsterisk()"
+       (keydown.shift.*)="onKeydownShiftAsterisk()"
+       [attr.tabindex]="tabIndex"
+  >
+    <button *ngIf="node.isBranch" type="button" class="collapse material-symbols-outlined" tabindex="-1">▼</button>
+    <button *ngIf="node.isBranch" type="button" class="expand material-symbols-outlined" tabindex="-1">▶</button>
+    <span class="content">
+      {{ node.data.text }}
+    </span>
+  </div>
+</ng-template>
+<ul [attr.role]="listRole" *ngIf="node.isBranch" [attr.aria-expanded]="isExpanded">
+  <!-- 👇 Linter suggests 'aria-selected' should be present for role 'treeitem'. Adding it (even with a "false" value)
+          would mean we intend the node to be selectable and it's not the case.
+          See README.md for more information, it's an issue with 'treeitem' role in WAI-ARIA 1.2 specs -->
+  <!-- eslint-disable-next-line @angular-eslint/template/role-has-required-aria -->
+  <li *ngFor="let childNode of node.children" [attr.role]="listItemRole">
+    <app-tree-node [node]="childNode" [parent]="this" #children></app-tree-node>
+  </li>
+</ul>

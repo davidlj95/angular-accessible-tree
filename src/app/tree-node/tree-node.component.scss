@@ -1,0 +1,37 @@
+:host {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-inline-start: 16px;
+  }
+  .data {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+
+    button {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+    }
+
+    &.actionable {
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+  &[aria-expanded="true"] {
+    > .data > .expand {
+      display: none;
+    }
+  }
+  &[aria-expanded="false"] {
+    > .data > .collapse {
+      display: none;
+    }
+    > ul {
+      display: none;
+    }
+  }
+}
