@@ -1,0 +1,27 @@
+name: Push to main
+
+on:
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/reusable-build.yml
+    permissions:
+      contents: write
+    with:
+      artifact-name: build
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    uses: ./.github/workflows/reusable-deploy-github-pages.yml
+    with:
+      build-artifact-name: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

@@ -1,0 +1,43 @@
+name: Build
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        required: false
+        type: string
+
+jobs:
+  build:
+    name: Build app
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Cache Angular build
+        uses: actions/cache@v3
+        env:
+          cache-name: angular-cache
+        with:
+          path: .angular/cache
+          key: ${{ env.cache-name }}-${{ github.ref }}
+          restore-keys: |
+            ${{ env.cache-name }}
+      - name: Build app
+        run: npm run build
+      - name: Upload built app
+        if: ${{ inputs.artifact-name != '' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: 'dist/angular-accessible-tree'
+          retention-days: 5
