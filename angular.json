@@ -48,7 +48,8 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/angular-accessible-tree/"
             },
             "development": {
               "buildOptimizer": false,
