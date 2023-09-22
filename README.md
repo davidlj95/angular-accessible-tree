@@ -10,6 +10,10 @@ Nodes can't be selected. Mainly adds keyboard interactions and focus management.
 [aria-apg]: https://www.w3.org/WAI/ARIA/apg/
 [tree-spec]: https://www.w3.org/TR/wai-aria-1.2/#tree
 
+## Demo
+Check live demo at
+https://davidlj95.github.io/angular-accessible-tree/
+
 ## Implemented interactions
 [Everything non-selectable except type-ahead from the authoring guides](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/#keyboardinteraction) (mostly from [first example](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/examples/treeview-1a/)):
 - Focus is:
