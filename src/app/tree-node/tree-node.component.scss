@@ -8,7 +8,7 @@
   .data {
     display: flex;
     align-items: center;
-    padding: 8px;
+    padding: 4px 0;
 
     button {
       padding: 0;
@@ -21,15 +21,7 @@
       font-weight: bold;
     }
   }
-  &[aria-expanded="true"] {
-    > .data > .expand {
-      display: none;
-    }
-  }
   &[aria-expanded="false"] {
-    > .data > .collapse {
-      display: none;
-    }
     > ul {
       display: none;
     }

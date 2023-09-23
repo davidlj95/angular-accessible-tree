@@ -1,6 +1,5 @@
 import {Component, ElementRef, HostBinding, Input, QueryList, ViewChildren} from '@angular/core';
 import {TreeNode} from "./tree-node";
-import {DomSanitizer} from "@angular/platform-browser";
 import {ComponentTreeNode} from "./component-tree-node";
 
 @Component({
@@ -18,7 +17,6 @@ export class TreeNodeComponent {
   private _focused?: boolean
 
   constructor(
-    protected sanitizer: DomSanitizer,
     private elementRef: ElementRef,
   ) {
   }
@@ -38,9 +36,6 @@ export class TreeNodeComponent {
   public get listItemRole(): 'treeitem' {
     return 'treeitem'
   }
-
-  // TODO: Build trees from certain depth onwards
-  //public INDENT_LEVEL_OF_FIRST_TREE = 1;
 
   public get tabIndex(): 0 | -1 {
     if (this._focused === undefined) {
@@ -82,7 +77,7 @@ export class TreeNodeComponent {
       return
     }
 
-    // TODO: empty root node case
+    // TODO: empty root node data case
     if (this.node.parent && (this.node.isLeaf || !this._expanded)) {
       this.moveFocusTo(this.parent)
     }
@@ -122,8 +117,7 @@ export class TreeNodeComponent {
   }
 
   public focus() {
-    this.elementRef.nativeElement
-      .querySelector('.data').focus()
+    this.elementRef.nativeElement.querySelector('.data').focus()
     this._focused = true
   }
 
